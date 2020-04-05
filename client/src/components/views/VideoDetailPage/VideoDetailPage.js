@@ -25,6 +25,7 @@ function VideoDetailPage(props) {
     Axios.post("/api/comment/getComments", variable).then(response => {
       if (response.data.success) {
         setComments(response.data.comments);
+        console.log(response.data.comments)
       } else {
         alert("댓글 정보를 가져오는 데 실패했습니다.");
       }
@@ -49,7 +50,7 @@ function VideoDetailPage(props) {
               <List.Item.Meta avatar={<Avatar src={VideoDetail.writer.image} />} title={VideoDetail.writer.name} description={VideoDetail.writer.description} />
             </List.Item>
             {/* comment */}
-            <Comment refreshFunction={refreshFunction} postid={videoId} commentLists={Comments} />
+            <Comment refreshFunction={refreshFunction} postId={videoId} commentLists={Comments} />
           </div>
         </Col>
         <Col lg={6} xs={24}>

@@ -6,7 +6,7 @@ import ReplyComment from "./ReplyComment";
 
 function Comment(props) {
   const user = useSelector(state => state.user);
-  const videoId = props.postid;
+  const videoId = props.postId;
   const [commentValue, setcommentValue] = useState("");
 
   const handleClick = event => {
@@ -19,7 +19,7 @@ function Comment(props) {
     const variables = {
       content: commentValue,
       writer: user.userData._id,
-      postId: videoId
+      postId: props.postId
     };
 
     Axios.post("/api/comment/saveComment", variables).then(response => {
@@ -37,7 +37,7 @@ function Comment(props) {
       <br />
       <p> Replies </p>
       <hr />
-
+      {console.log(props.commentLists)}
       {/* Comment Lists */}
       {props.commentLists &&
         props.commentLists.map((comment, index) => (
@@ -48,7 +48,6 @@ function Comment(props) {
               </React.Fragment>
             )
         ))}
-
       {/* Root Comment form */}
 
       <form style={{ display: "flex" }} onSubmit={onSubmit}>

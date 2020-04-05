@@ -16,7 +16,7 @@ router.post("/getLikes", (req, res) => {
     variable = { commentId: req.body.commentId };
   }
 
-  Like.find(vabiable).exec((err, likes) => {
+  Like.find(variable).exec((err, likes) => {
     if (err) return res.status(400).send(err);
     res.status(200).json({ success: true, likes });
   });
@@ -31,9 +31,9 @@ router.post("/getDislikes", (req, res) => {
     variable = { commentId: req.body.commentId };
   }
 
-  Dislike.find(vabiable).exec((err, likes) => {
+  Dislike.find(variable).exec((err, dislikes) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, likes });
+    res.status(200).json({ success: true, dislikes });
   });
 });
 
@@ -89,7 +89,6 @@ router.post("/unDislike", (req, res) => {
     });
   });
 
-module.exports = router;
 
 router.post("/upDislike", (req, res) => {
     let variable = {};
@@ -100,7 +99,7 @@ router.post("/upDislike", (req, res) => {
       variable = { commentId: req.body.commentId, userId: req.body.userId };
     }
   
-    // Like collection에 clikc 정보 입력
+    // Like collection에 click 정보 입력
     const dislike = new Dislike(variable);
     dislike.save((err, dislikeResult) => {
       if (err) return resjson({ success: false, err });
@@ -112,3 +111,6 @@ router.post("/upDislike", (req, res) => {
       });
     });
   });
+
+
+  module.exports = router;
